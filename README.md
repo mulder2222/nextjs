@@ -1,108 +1,91 @@
-# Next.js
+# nextjs
 
-In this example we will be deploying a simple "Hello World" example with Next.js.
+Next.js frontend showcase for an operations dashboard interface, focused on layout structure, data presentation, filtering, and maintainable UI composition.
 
-### Getting started with Next.js
+## Overview
 
-- Create a `pages` folder with an `index.js` file with the following code:
+This repository is a frontend-only Next.js application that demonstrates how I approach dashboard-style product UI in a structured way.
 
-```jsx
-import Link from "next/link";
-import Header from "../components/header";
+Instead of using Next.js as a tutorial sandbox, this project is intentionally shaped like a real internal tool:
 
-export default () => (
-  <main>
-    <Header />
-    <section>
-      <Link href="/about">
-        <a>Go to About Me</a>
-      </Link>
-    </section>
-  </main>
-);
+- information-dense screens
+- clear navigation
+- strong visual hierarchy
+- reusable dashboard components
+- loading and empty states
+- route-based structure with the App Router
+
+## Why This Repo Exists
+
+I wanted one public repo that shows I can work comfortably in a modern Next.js codebase without pretending it is a backend-heavy Laravel project.
+
+The goal here is to show:
+
+- App Router structure
+- server-first page composition
+- reusable dashboard UI primitives
+- maintainable layout and styling decisions
+- product-oriented frontend work rather than tutorial code
+
+## Product Direction
+
+The app is framed as an operations UI for monitoring jobs, webhook deliveries, and system health.
+
+That gives the frontend a realistic purpose:
+
+- summary cards
+- queue and delivery tables
+- status badges
+- route-level dashboards
+- search and filtering
+
+## Stack
+
+- Next.js App Router
+- React
+- TypeScript-ready project structure
+- CSS modules-free global styling for fast iteration
+
+## Routes
+
+- `/` dashboard overview
+- `/deliveries` webhook delivery monitoring
+- `/insights` operational snapshots and implementation notes
+
+## UI Principles
+
+- keep the layout dense but readable
+- make status visible at a glance
+- prefer composable primitives over giant page files
+- use restrained motion and strong spacing
+- avoid generic SaaS-template aesthetics
+
+## Folder Structure
+
+```text
+app/
+  deliveries/
+  insights/
+  layout.tsx
+  page.tsx
+  globals.css
+components/
+  dashboard/
+  layout/
+lib/
 ```
 
-- Now lets create an `about.js` file inside the `pages` folder with the following code:
+## What This Repo Demonstrates
 
-```jsx
-import { Component } from "react";
-import Link from "next/link";
-import Header from "../components/header";
+- route-driven UI structure
+- reusable dashboard cards and tables
+- filtering and search interaction patterns
+- practical information architecture for internal tools
 
-class AboutPage extends Component {
-  static getInitialProps() {
-    const isServer = typeof window === "undefined";
-    return { isServer };
-  }
+## Future Improvements
 
-  render() {
-    return (
-      <main>
-        <Header />
-        <section>
-          <p>
-            This is another page of the SSR example, you accessed it{" "}
-            <strong>{this.props.isServer ? "server" : "client"} side</strong>.
-          </p>
-          <p>
-            You can reload to see how the page change.
-          </p>
-          <Link href="/">
-            <a>Go to Home</a>
-          </Link>
-        </section>
-      </main>
-    );
-  }
-}
-
-export default AboutPage;
-```
-
-- As you might noticed we have a component that is shared by both `index.js` and `about.js` files, let's create that one now. Create a folder named `components` with a file named `header.js` in it and add the following code:
-
-```jsx
-export default () => (
-  <header>
-    <h1>Next.js Example</h1>
-  </header>
-);
-```
-
-- Finally in order for Next.js to be deployed we could either have a `next.config.js` or a `package.json`, for this example we are just going to create a `next.config.js` with the following code:
-
-```js
-module.exports = {
-  target: 'serverless'
-}
-```
-
-### Deploy with Now
-
-First we need to create a `now.json` configuration file to instruct Now how to build the project.
-
-For this example we will be using our newest version [Now 2.0](https://zeit.co/now).
-
-By adding the `version` key to the `now.json` file, we can specify which Now Platform version to use.
-
-We also need to define each builders we would like to use. [Builders](https://zeit.co/docs/v2/deployments/builders/overview/) are modules that take a deployment's source and return an output, consisting of [either static files or dynamic Lambdas](https://zeit.co/docs/v2/deployments/builds/#sources-and-outputs).
-
-In this case we are going to use `@now/next` to build and deploy our Next.js application selecting the `next.config.js` as our entry point. We will also define a name for our project (optional).
-
-```json
-{
-    "version": 2,
-    "name": "nextjs",
-    "builds": [
-        { "src": "next.config.js", "use": "@now/next" }
-    ]
-}
-```
-
-Visit our [documentation](https://zeit.co/docs/v2/deployments/configuration) for more information on the `now.json` configuration file.
-
-We are now ready to deploy the app.
-
-```
-now
-```
+- real API integration
+- loading skeletons
+- route handlers for mocked data
+- accessibility pass
+- screenshots and demo recording
